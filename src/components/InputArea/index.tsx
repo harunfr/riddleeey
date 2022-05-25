@@ -1,4 +1,5 @@
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import Game from '../../Game/Game';
 import { Container, Row, Cell } from './styles';
@@ -9,9 +10,9 @@ function InputArea() {
   return (
     <Container>
       {game.cellsStack.map((row) => (
-        <Row>
+        <Row key={uuidv4()}>
           {row.map((cell) => (
-            <Cell>{cell.letter}</Cell>
+            <Cell key={uuidv4()}>{cell.letter || 'A'}</Cell>
           ))}
         </Row>
       ))}

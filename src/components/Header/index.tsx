@@ -14,15 +14,15 @@ function Header() {
   return (
     <Container>
       <Wrapper>
-        <Menu />
-        <HowTo />
+        <Menu>M</Menu>
+        <HowTo>H</HowTo>
       </Wrapper>
 
-      <Logo />
+      <Logo>Riddle</Logo>
 
       <Wrapper>
-        <Statistics />
-        <Settings />
+        <Statistics>S</Statistics>
+        <Settings>G</Settings>
       </Wrapper>
     </Container>
   );

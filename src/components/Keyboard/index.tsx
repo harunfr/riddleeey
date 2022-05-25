@@ -1,4 +1,5 @@
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import { Container, Row, Key } from './styles';
 
@@ -10,17 +11,17 @@ function Header() {
     <Container>
       <Row>
         {firstRow.map((keyName) => (
-          <Key>{keyName}</Key>
+          <Key key={uuidv4()}>{keyName}</Key>
         ))}
       </Row>
       <Row>
         {secondRow.map((keyName) => (
-          <Key>{keyName}</Key>
+          <Key key={uuidv4()}>{keyName}</Key>
         ))}
       </Row>
       <Row>
         {thirdRow.map((keyName) => (
-          <Key>{keyName}</Key>
+          <Key key={uuidv4()}>{keyName}</Key>
         ))}
       </Row>
     </Container>

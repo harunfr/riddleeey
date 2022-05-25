@@ -1,8 +1,17 @@
 import styled from 'styled-components';
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid red;
+  height: 52px;
+`;
 
-export const Wrapper = styled.div``;
+export const Wrapper = styled.div`
+  display: flex;
+  column-gap: 10px;
+`;
 
 export const Menu = styled.div``;
 
