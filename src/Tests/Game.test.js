@@ -15,50 +15,55 @@ test('Riddle Wordle Tests', () => {
 
 describe('Initial state of cells.', () => {
   const game = new Game();
-  xtest('Handles initial state of cells.', () => {
-    expect(game.cellsStack.first).toEqual({
-      first: [{ letter: null }, { letter: null }, { letter: null }],
-      second: [{ letter: null }, { letter: null }, { letter: null }],
-      third: [{ letter: null }, { letter: null }, { letter: null }],
-      fourth: [{ letter: null }, { letter: null }, { letter: null }],
-      fifth: [{ letter: null }, { letter: null }, { letter: null }],
-      sixth: [{ letter: null }, { letter: null }, { letter: null }],
-    });
+
+  test('Handles initial state of cells.', () => {
+    expect(game.cellsStack).toEqual([
+      [{ letter: null }, { letter: null }, { letter: null }],
+      [{ letter: null }, { letter: null }, { letter: null }],
+      [{ letter: null }, { letter: null }, { letter: null }],
+      [{ letter: null }, { letter: null }, { letter: null }],
+      [{ letter: null }, { letter: null }, { letter: null }],
+      [{ letter: null }, { letter: null }, { letter: null }],
+    ]);
   });
 });
 
 describe('Adding and removing letters.', () => {
   const game = new Game();
-  xtest('Handles adding first letter.', () => {
+  test('Handles adding first letter.', () => {
     game.push('W');
-    expect(game.cellsStack.first).toEqual([
+    const firstCell = game.cellsStack[0];
+    expect(firstCell).toEqual([
       { letter: 'W' },
       { letter: null },
       { letter: null },
     ]);
   });
 
-  xtest('Handles adding second letter.', () => {
+  test('Handles adding second letter.', () => {
     game.push('O');
-    expect(game.cellsStack.first).toEqual([
+    const firstCell = game.cellsStack[0];
+    expect(firstCell).toEqual([
       { letter: 'W' },
       { letter: 'O' },
       { letter: null },
     ]);
   });
 
-  xtest('Handles adding third letter.', () => {
+  test('Handles adding third letter.', () => {
+    const firstCell = game.cellsStack[0];
     game.push('R');
-    expect(game.cellsStack.first).toEqual([
+    expect(firstCell).toEqual([
       { letter: 'W' },
       { letter: 'O' },
       { letter: 'R' },
     ]);
   });
 
-  xtest('Handles adding fourth letter.', () => {
+  test('Handles adding fourth letter.', () => {
     game.push('D');
-    expect(game.cellsStack.first).toEqual([
+    const firstCell = game.cellsStack[0];
+    expect(firstCell).toEqual([
       { letter: 'W' },
       { letter: 'O' },
       { letter: 'R' },
@@ -66,9 +71,10 @@ describe('Adding and removing letters.', () => {
     ]);
   });
 
-  xtest('Handles removing first letter.', () => {
+  test('Handles removing first letter.', () => {
     game.pop();
-    expect(game.cellsStack.first).toEqual([
+    const firstCell = game.cellsStack[0];
+    expect(firstCell).toEqual([
       { letter: 'W' },
       { letter: 'O' },
       { letter: 'R' },
@@ -77,7 +83,8 @@ describe('Adding and removing letters.', () => {
 
   xtest('Handles removing second letter.', () => {
     game.pop();
-    expect(game.cellsStack.first).toEqual([
+    const firstCell = game.cellsStack[0];
+    expect(firstCell).toEqual([
       { letter: 'W' },
       { letter: 'O' },
       { letter: null },
@@ -86,7 +93,8 @@ describe('Adding and removing letters.', () => {
 
   xtest('Handles removing third letter.', () => {
     game.pop();
-    expect(game.cellsStack.first).toEqual([
+    const firstCell = game.cellsStack[0];
+    expect(firstCell).toEqual([
       { letter: 'W' },
       { letter: null },
       { letter: null },
@@ -95,7 +103,8 @@ describe('Adding and removing letters.', () => {
 
   xtest('Handles removing fourth letter.', () => {
     game.pop();
-    expect(game.cellsStack.first).toEqual([
+    const firstCell = game.cellsStack[0];
+    expect(firstCell).toEqual([
       { letter: null },
       { letter: null },
       { letter: null },
@@ -166,7 +175,8 @@ describe('After checking, marks cells accordingly.', () => {
     game.answer = 'QUICK';
     pushAll('QUICK', game);
     game.makeAGuess();
-    expect(game.cellsStack.first).toEqual([
+    const firstCell = game.cellsStack[0];
+    expect(firstCell).toEqual([
       { letter: 'Q', status: 'correct' },
       { letter: 'U', status: 'correct' },
       { letter: 'I', status: 'correct' },
@@ -179,7 +189,8 @@ describe('After checking, marks cells accordingly.', () => {
     game.answer = 'XINBO';
     pushAll('INBOX', game);
     game.makeAGuess();
-    expect(game.cellsStack.first).toEqual([
+    const firstCell = game.cellsStack[0];
+    expect(firstCell).toEqual([
       { letter: 'I', status: 'present' },
       { letter: 'N', status: 'present' },
       { letter: 'B', status: 'present' },
@@ -192,7 +203,8 @@ describe('After checking, marks cells accordingly.', () => {
     game.answer = 'BLAZE';
     pushAll('QUICK', game);
     game.makeAGuess();
-    expect(game.cellsStack.first).toEqual([
+    const firstCell = game.cellsStack[0];
+    expect(firstCell).toEqual([
       { letter: 'Q', status: 'absent' },
       { letter: 'U', status: 'absent' },
       { letter: 'I', status: 'absent' },
@@ -205,7 +217,8 @@ describe('After checking, marks cells accordingly.', () => {
     game.answer = 'PIXIE';
     pushAll('PIXEL', game);
     game.makeAGuess();
-    expect(game.cellsStack.first).toEqual([
+    const firstCell = game.cellsStack[0];
+    expect(firstCell).toEqual([
       { letter: 'P', status: 'correct' },
       { letter: 'I', status: 'correct' },
       { letter: 'X', status: 'correct' },
@@ -224,7 +237,8 @@ describe('Checking shorter and longer guesses.', () => {
     game.answer = 'PIXIE';
     pushAll('PIX', game);
     game.makeAGuess();
-    expect(game.cellsStack.first).toEqual([
+    const firstCell = game.cellsStack[0];
+    expect(firstCell).toEqual([
       { letter: 'P', status: 'correct' },
       { letter: 'I', status: 'correct' },
       { letter: 'X', status: 'correct' },
@@ -237,7 +251,8 @@ describe('Checking shorter and longer guesses.', () => {
     game.answer = 'AXLE';
     pushAll('AXE', game);
     game.makeAGuess();
-    expect(game.cellsStack.first).toEqual([
+    const firstCell = game.cellsStack[0];
+    expect(firstCell).toEqual([
       { letter: 'A', status: 'correct' },
       { letter: 'X', status: 'correct' },
       { letter: 'E', status: 'present' },
@@ -249,7 +264,8 @@ describe('Checking shorter and longer guesses.', () => {
     game.answer = 'PIXIE';
     pushAll('PIXALATED', game);
     game.makeAGuess();
-    expect(game.cellsStack.first).toEqual([
+    const firstCell = game.cellsStack[0];
+    expect(firstCell).toEqual([
       { letter: 'P', status: 'correct' },
       { letter: 'I', status: 'correct' },
       { letter: 'X', status: 'correct' },
@@ -262,7 +278,8 @@ describe('Checking shorter and longer guesses.', () => {
     game.answer = 'AXLEO';
     pushAll('AXEOFLOKI', game);
     game.makeAGuess();
-    expect(game.cellsStack.first).toEqual([
+    const firstCell = game.cellsStack[0];
+    expect(firstCell).toEqual([
       { letter: 'A', status: 'correct' },
       { letter: 'X', status: 'correct' },
       { letter: 'E', status: 'present' },
@@ -328,8 +345,8 @@ describe('Usual gameplay.', () => {
     game.push('R');
     game.push('Y');
     game.makeAGuess();
-    expect(game.cellsStack).toEqual({
-      first: [
+    expect(game.cellsStack).toEqual([
+      [
         { letter: 'W', status: 'correct' },
         { letter: 'O', status: 'correct' },
         { letter: 'R', status: 'correct' },
@@ -337,7 +354,7 @@ describe('Usual gameplay.', () => {
         { letter: 'Y', status: 'absent' },
         { letter: null },
       ],
-      second: [
+      [
         { letter: null },
         { letter: null },
         { letter: null },
@@ -345,7 +362,7 @@ describe('Usual gameplay.', () => {
         { letter: null },
         { letter: null },
       ],
-      third: [
+      [
         { letter: null },
         { letter: null },
         { letter: null },
@@ -353,7 +370,7 @@ describe('Usual gameplay.', () => {
         { letter: null },
         { letter: null },
       ],
-      fourth: [
+      [
         { letter: null },
         { letter: null },
         { letter: null },
@@ -361,7 +378,7 @@ describe('Usual gameplay.', () => {
         { letter: null },
         { letter: null },
       ],
-      fifth: [
+      [
         { letter: null },
         { letter: null },
         { letter: null },
@@ -369,7 +386,7 @@ describe('Usual gameplay.', () => {
         { letter: null },
         { letter: null },
       ],
-      sixth: [
+      [
         { letter: null },
         { letter: null },
         { letter: null },
@@ -377,7 +394,7 @@ describe('Usual gameplay.', () => {
         { letter: null },
         { letter: null },
       ],
-    });
+    ]);
   });
 
   xtest('Handles wrong guess.', () => {
