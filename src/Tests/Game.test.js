@@ -4,7 +4,7 @@ import Game from '../Game/Game';
 function pushAll(guess, gameObject) {
   const letters = guess.split('');
   letters.forEach((letter) => {
-    gameObject.push(letter);
+    gameObject.add(letter);
   });
 }
 
@@ -31,7 +31,7 @@ describe('Initial state of cells.', () => {
 describe('Adding and removing letters.', () => {
   const game = new Game();
   test('Handles adding first letter.', () => {
-    game.push('W');
+    game.add('W');
     const firstCell = game.cellsStack[0];
     expect(firstCell).toEqual([
       { letter: 'W' },
@@ -41,7 +41,7 @@ describe('Adding and removing letters.', () => {
   });
 
   test('Handles adding second letter.', () => {
-    game.push('O');
+    game.add('O');
     const firstCell = game.cellsStack[0];
     expect(firstCell).toEqual([
       { letter: 'W' },
@@ -52,7 +52,7 @@ describe('Adding and removing letters.', () => {
 
   test('Handles adding third letter.', () => {
     const firstCell = game.cellsStack[0];
-    game.push('R');
+    game.add('R');
     expect(firstCell).toEqual([
       { letter: 'W' },
       { letter: 'O' },
@@ -61,7 +61,7 @@ describe('Adding and removing letters.', () => {
   });
 
   test('Handles adding fourth letter.', () => {
-    game.push('D');
+    game.add('D');
     const firstCell = game.cellsStack[0];
     expect(firstCell).toEqual([
       { letter: 'W' },
@@ -72,7 +72,7 @@ describe('Adding and removing letters.', () => {
   });
 
   test('Handles removing first letter.', () => {
-    game.pop();
+    game.delete();
     const firstCell = game.cellsStack[0];
     expect(firstCell).toEqual([
       { letter: 'W' },
@@ -81,8 +81,8 @@ describe('Adding and removing letters.', () => {
     ]);
   });
 
-  xtest('Handles removing second letter.', () => {
-    game.pop();
+  test('Handles removing second letter.', () => {
+    game.delete();
     const firstCell = game.cellsStack[0];
     expect(firstCell).toEqual([
       { letter: 'W' },
@@ -91,8 +91,8 @@ describe('Adding and removing letters.', () => {
     ]);
   });
 
-  xtest('Handles removing third letter.', () => {
-    game.pop();
+  test('Handles removing third letter.', () => {
+    game.delete();
     const firstCell = game.cellsStack[0];
     expect(firstCell).toEqual([
       { letter: 'W' },
@@ -101,8 +101,8 @@ describe('Adding and removing letters.', () => {
     ]);
   });
 
-  xtest('Handles removing fourth letter.', () => {
-    game.pop();
+  test('Handles removing fourth letter.', () => {
+    game.delete();
     const firstCell = game.cellsStack[0];
     expect(firstCell).toEqual([
       { letter: null },
@@ -113,15 +113,17 @@ describe('Adding and removing letters.', () => {
 });
 
 describe('Merging cells to make a guess.', () => {
-  const game = new Game();
-
-  xtest('Handles joining W, I, N, D to WIND.', () => {
+  test('Handles joining W, I, N, D to WIND.', () => {
+    const game = new Game();
+    game.answer = 'WIND';
     pushAll('WIND', game);
     game.makeAGuess();
     expect(game.guess).toBe('WIND');
   });
 
-  xtest('Handles joining R, E, A, C, T to REACT.', () => {
+  test('Handles joining R, E, A, C, T to REACT.', () => {
+    const game = new Game();
+    game.answer = 'REACT';
     pushAll('REACT', game);
     game.makeAGuess();
     expect(game.guess).toBe('REACT');
@@ -129,49 +131,50 @@ describe('Merging cells to make a guess.', () => {
 });
 
 describe('Checking guess against answer in first turn.', () => {
-  beforeEach(() => {
-    game = new Game();
-  });
-
-  xtest('Handles checking WORD agains WIND.', () => {
-    game.guess = 'WORD';
+  test('Handles checking WORD agains WIND.', () => {
+    const game = new Game();
+    game.answer = 'WIND';
+    pushAll('WORD', game);
     game.makeAGuess();
     expect(game.isGuessed).toBe(false);
   });
 
-  xtest('Handles checking WIND agains WIND.', () => {
-    game.guess = 'WIND';
+  test('Handles checking WIND agains WIND.', () => {
+    const game = new Game();
+    game.answer = 'WIND';
+    pushAll('WIND', game);
     game.makeAGuess();
     expect(game.isGuessed).toBe(true);
   });
 
-  xtest('Handles game result.', () => {
-    game.guess = 'WIND';
+  test('Handles game result.', () => {
+    const game = new Game();
+    game.answer = 'WIND';
+    pushAll('WIND', game);
     game.makeAGuess();
     expect(game.result).toBe('success');
   });
 
-  xtest('Handles checking if word is shorter than answer.', () => {
+  test('Handles checking if word is shorter than answer.', () => {
+    const game = new Game();
     game.answer = 'WIND';
-    game.guess = 'ASK';
+    pushAll('ASK', game);
     game.makeAGuess();
     expect(game.isGuessed).toBe(false);
   });
 
-  xtest('Handles checking if word is longer than answer.', () => {
+  test('Handles checking if word is longer than answer.', () => {
+    const game = new Game();
     game.answer = 'WIND';
-    game.guess = 'DISTILLATION';
+    pushAll('DISTILLATION', game);
     game.makeAGuess();
     expect(game.isGuessed).toBe(false);
   });
 });
 
 describe('After checking, marks cells accordingly.', () => {
-  beforeEach(() => {
-    game = new Game();
-  });
-
-  xtest('Handles marking letters correct.', () => {
+  test('Handles marking letters correct.', () => {
+    const game = new Game();
     game.answer = 'QUICK';
     pushAll('QUICK', game);
     game.makeAGuess();
@@ -185,7 +188,8 @@ describe('After checking, marks cells accordingly.', () => {
     ]);
   });
 
-  xtest('Handles marking letters present.', () => {
+  test('Handles marking letters present.', () => {
+    const game = new Game();
     game.answer = 'XINBO';
     pushAll('INBOX', game);
     game.makeAGuess();
@@ -199,7 +203,8 @@ describe('After checking, marks cells accordingly.', () => {
     ]);
   });
 
-  xtest('Handles marking letters absent.', () => {
+  test('Handles marking letters absent.', () => {
+    const game = new Game();
     game.answer = 'BLAZE';
     pushAll('QUICK', game);
     game.makeAGuess();
@@ -213,7 +218,8 @@ describe('After checking, marks cells accordingly.', () => {
     ]);
   });
 
-  xtest('Handles marking letters correct, present and absent together.', () => {
+  test('Handles marking letters correct, present and absent together.', () => {
+    const game = new Game();
     game.answer = 'PIXIE';
     pushAll('PIXEL', game);
     game.makeAGuess();
@@ -229,11 +235,8 @@ describe('After checking, marks cells accordingly.', () => {
 });
 
 describe('Checking shorter and longer guesses.', () => {
-  beforeEach(() => {
-    game = new Game();
-  });
-
-  xtest('Handles checking PIX against PIXIE.', () => {
+  test('Handles checking PIX against PIXIE.', () => {
+    const game = new Game();
     game.answer = 'PIXIE';
     pushAll('PIX', game);
     game.makeAGuess();
@@ -247,7 +250,8 @@ describe('Checking shorter and longer guesses.', () => {
     ]);
   });
 
-  xtest('Handles checking AXE against AXLE.', () => {
+  test('Handles checking AXE against AXLE.', () => {
+    const game = new Game();
     game.answer = 'AXLE';
     pushAll('AXE', game);
     game.makeAGuess();
@@ -260,7 +264,8 @@ describe('Checking shorter and longer guesses.', () => {
     ]);
   });
 
-  xtest('Handles checking PIXALATED against PIXIE.', () => {
+  test('Handles checking PIXALATED against PIXIE.', () => {
+    const game = new Game();
     game.answer = 'PIXIE';
     pushAll('PIXALATED', game);
     game.makeAGuess();
@@ -274,7 +279,8 @@ describe('Checking shorter and longer guesses.', () => {
     ]);
   });
 
-  xtest('Handles checking AXEOFLOKI against AXLEO.', () => {
+  test('Handles checking AXEOFLOKI against AXLEO.', () => {
+    const game = new Game();
     game.answer = 'AXLEO';
     pushAll('AXEOFLOKI', game);
     game.makeAGuess();
@@ -290,43 +296,49 @@ describe('Checking shorter and longer guesses.', () => {
 });
 
 describe('Handling invalid inputs.', () => {
-  beforeEach(() => {
-    game = new Game();
-  });
-
-  xtest("Can't enter previous answer again", () => {
+  test("Can't enter previous answer again", () => {
+    const game = new Game();
     game.answer = 'ASK';
-    pushAll('HEY');
+    game.add('H');
+    game.add('E');
+    game.add('Y');
+    // pushAll('HEY', game);
     game.makeAGuess();
-    pushAll('HEY');
+    game.add('H');
+    game.add('E');
+    game.add('Y');
+    // pushAll('HEY', game);
     game.makeAGuess();
     expect(game.guessCount).toBe(1);
   });
 
-  xtest("Can't enter any previous answer again.", () => {
+  test("Can't enter any previous answer again.", () => {
+    const game = new Game();
     game.answer = 'ASK';
-    pushAll('HEY');
+    pushAll('HEY', game);
     game.makeAGuess();
-    pushAll('FOX');
+    pushAll('FOX', game);
     game.makeAGuess();
-    pushAll('HEY');
+    pushAll('HEY', game);
     game.makeAGuess();
     expect(game.guessCount).toBe(2);
   });
 
-  xtest('Handles making first guess shorter than three.', () => {
+  test('Handles making first guess shorter than three.', () => {
+    const game = new Game();
     game.answer = 'ASK';
-    game.push('A');
+    game.add('A');
     game.makeAGuess();
     expect(game.guessCount).toBe(0);
   });
 
-  xtest('Handles making a guess having empty cell after the first guess.', () => {
+  test('Handles making a guess having empty cell after the first guess.', () => {
+    const game = new Game();
     game.answer = 'ASK';
-    pushAll('ALL');
+    pushAll('ALL', game);
     game.makeAGuess(); // guessCount becomes 1
-    game.push('A');
-    game.push('S');
+    game.add('A');
+    game.add('S');
     game.makeAGuess();
     expect(game.guessCount).toBe(1);
   });
@@ -336,14 +348,14 @@ describe('Usual gameplay.', () => {
   const game = new Game();
   game.answer = 'WORDLE';
 
-  xtest('Handles stack of cells.', () => {
-    game.push('W');
-    game.push('O');
-    game.push('T');
-    game.pop();
-    game.push('R');
-    game.push('R');
-    game.push('Y');
+  test('Handles stack of cells.', () => {
+    game.add('W');
+    game.add('O');
+    game.add('T');
+    game.delete();
+    game.add('R');
+    game.add('R');
+    game.add('Y');
     game.makeAGuess();
     expect(game.cellsStack).toEqual([
       [
@@ -397,29 +409,29 @@ describe('Usual gameplay.', () => {
     ]);
   });
 
-  xtest('Handles wrong guess.', () => {
+  test('Handles wrong guess.', () => {
     game.isGuessed = false;
   });
 
-  xtest('Handles guess count.', () => {
+  test('Handles guess count.', () => {
     game.guessCount = 1;
   });
 
-  xtest('Handles correct guess.', () => {
-    pushAll('WORDLE');
+  test('Handles correct guess.', () => {
+    pushAll('WORDLE', game);
     game.makeAGuess();
     expect(game.isGuessed).toBe(true);
   });
 
-  xtest('Handles game result.', () => {
+  test('Handles game result.', () => {
     game.result = 'success';
   });
 
-  xtest('Handles guess count for more guesses.', () => {
+  test('Handles guess count for more guesses.', () => {
     game.guessCount = 2;
   });
 
-  xtest('Handles unsuccessful game play.', () => {
+  test('Handles unsuccessful game play.', () => {
     const game = new Game();
     game.answer = 'ASK';
     pushAll('WHO', game);
