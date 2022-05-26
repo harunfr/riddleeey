@@ -33,56 +33,119 @@ export default class Game {
 
     this.addingOrder = 0;
     this.guessCount = 0;
-    this.guess = '';
     this.isGuessed = false;
     this.answer = '';
+    this.guess = '';
     this.result = null;
     this.guesses = [];
   }
 
-  add(cellInput: string) {
-    const currentRow: Cell[] = this.cellsStack[this.guessCount];
-    const currentCell = currentRow[this.addingOrder];
+  public get currentRow(): Cell[] {
+    return this.cellsStack[this.guessCount];
+  }
 
-    if (!currentCell) {
-      currentRow.push({ letter: cellInput });
+  public get currentCell(): Cell {
+    return this.currentRow[this.addingOrder];
+  }
+
+  firstTurnAdd(cellInput: string) {
+    if (!this.currentCell) {
+      this.currentRow.push({ letter: cellInput });
     } else {
-      currentCell.letter = cellInput;
+      this.currentCell.letter = cellInput;
     }
-
     this.addingOrder += 1;
   }
 
-  delete() {
-    const currentRow = this.cellsStack[this.guessCount];
-    const firstCell = currentRow[0];
-    if (!firstCell.letter) {
+  nextTurnAdd(cellInput: string) {
+    const isOnLimit = this.addingOrder === this.answer.length;
+    if (!isOnLimit) {
+      this.currentCell.letter = cellInput;
+      this.addingOrder += 1;
+    }
+  }
+
+  isValidInput(input: string) {
+    const onlyLetterRegex = /^[a-zA-Z]$/;
+    const isValid: boolean = onlyLetterRegex.test(input);
+    return isValid;
+  }
+
+  add(cellInput: string) {
+    cellInput = cellInput.toUpperCase();
+    const hasRoomForLetter = this.addingOrder < 8;
+    if (!hasRoomForLetter || !this.isValidInput(cellInput)) {
       return;
     }
 
-    this.addingOrder -= 1;
+    const isFirstGuess = this.guessCount === 0;
 
-    for (let index = currentRow.length - 1; index >= 0; index -= 1) {
-      if (currentRow.length > 3) {
-        currentRow.pop();
-        return;
+    if (isFirstGuess) {
+      this.firstTurnAdd(cellInput);
+    } else {
+      this.nextTurnAdd(cellInput);
+    }
+  }
+
+  handleFirstTurnDelete(lastCell: Cell) {
+    if (this.currentRow.length > 3) {
+      this.currentRow.pop();
+    } else {
+      lastCell.letter = null;
+    }
+  }
+
+  handleNextTurnDelete(lastCell: Cell) {
+    lastCell.letter = null;
+  }
+
+  delete() {
+    const currentRow = this.currentRow;
+    if (currentRow[0].letter === null) {
+      return;
+    }
+    const lastcellHasLetter = this.currentRow[this.addingOrder - 1];
+
+    if (this.guessCount === 0) {
+      this.handleFirstTurnDelete(lastcellHasLetter);
+    } else {
+      this.handleNextTurnDelete(lastcellHasLetter);
+    }
+
+    this.addingOrder -= 1;
+  }
+
+  handleFirstGuess() {
+    const currentRow = this.currentRow;
+
+    if (currentRow.length < this.answer.length) {
+      while (currentRow.length < this.answer.length) {
+        currentRow.push({ letter: null });
       }
-      if (currentRow[index].letter) {
-        currentRow[index].letter = null;
-        return;
+    }
+    if (currentRow.length > this.answer.length) {
+      while (currentRow.length > this.answer.length) {
+        currentRow.pop();
+      }
+    }
+
+    for (const row of this.cellsStack) {
+      while (row.length < this.answer.length) {
+        row.push({ letter: null });
       }
     }
   }
 
   makeAGuess() {
-    this.guess = '';
-    const currentRow = this.cellsStack[this.guessCount];
-    this.guess = currentRow.reduce((joined, cell) => {
+    this.guess = this.currentRow.reduce((joined, cell) => {
       if (cell.letter) {
         return joined + cell.letter;
       }
       return joined;
     }, '');
+
+    const currentRow = this.currentRow;
+
     const isSameGuess = this.guesses.indexOf(this.guess) !== -1;
 
     if (isSameGuess || this.guess.length < 3) {
@@ -91,22 +154,9 @@ export default class Game {
 
     // handle first guess.
     if (this.guessCount === 0) {
-      if (currentRow.length < this.answer.length) {
-        while (currentRow.length < this.answer.length) {
-          currentRow.push({ letter: null });
-        }
-      }
-      if (currentRow.length > this.answer.length) {
-        while (currentRow.length > this.answer.length) {
-          currentRow.pop();
-        }
-      }
-
-      for (const row of this.cellsStack) {
-        while (row.length < this.answer.length) {
-          row.push({ letter: null });
-        }
-      }
+      this.handleFirstGuess();
+    } else if (this.guess.length !== this.answer.length) {
+      return;
     }
 
     // handle if answer is correct.
