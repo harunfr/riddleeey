@@ -1,6 +1,6 @@
 import React from 'react';
-import { DecorativeContainer, DecorativeCell } from './styles';
 import { v4 as uuidv4 } from 'uuid';
+import { DecorativeContainer, DecorativeCell } from './styles';
 
 function DecorativeCells() {
   return (

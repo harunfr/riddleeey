@@ -1,6 +1,6 @@
 import Game from '../Game/Game';
 
-// helper method for tests.
+// Helper method for tests.
 function pushAll(guess, gameObject) {
   const letters = guess.split('');
   letters.forEach((letter) => {
@@ -8,7 +8,7 @@ function pushAll(guess, gameObject) {
   });
 }
 
-// to see all test descriptions
+// To see all test descriptions
 test('Riddle Wordle Tests', () => {
   expect(1).toBe(1);
 });
@@ -112,7 +112,7 @@ describe('Adding and removing letters.', () => {
   });
 });
 
-describe('Merging cells to make a guess.', () => {
+describe('Checking guess against answer in first turn.', () => {
   test('Handles joining W, I, N, D to WIND.', () => {
     const game = new Game();
     game.answer = 'WIND';
@@ -128,9 +128,7 @@ describe('Merging cells to make a guess.', () => {
     game.makeAGuess();
     expect(game.guess).toBe('REACT');
   });
-});
 
-describe('Checking guess against answer in first turn.', () => {
   test('Handles checking WORD agains WIND.', () => {
     const game = new Game();
     game.answer = 'WIND';
@@ -447,5 +445,54 @@ describe('Usual gameplay.', () => {
     pushAll('MIC', game);
     game.makeAGuess();
     expect(game.result).toBe('failure');
+  });
+});
+
+/// // Extra Tests After Main Game Logic Implemented.
+describe('Behaves correctly if shorter or longer input supplied.', () => {
+  xtest('Handles shorter inputs', () => {
+    const game = new Game();
+    game.answer = 'WORDLE';
+    pushAll('ILIKEWORDLE');
+  });
+});
+
+describe('Handles first guess.', () => {
+  xtest('Handles shorter inputs', () => {
+    const game = new Game();
+    game.answer = 'WORDLE';
+    pushAll('ILIKEWORDLE');
+  });
+});
+
+describe('Handles guesseses after first guesses.', () => {
+  xtest('Handles shorter inputs', () => {
+    const game = new Game();
+    game.answer = 'WORDLE';
+    pushAll('ILIKEWORDLE');
+  });
+});
+
+describe('Strange bug in game.', () => {
+  test('Strange bug at fourth guess.', () => {
+    const game = new Game();
+    game.answer = 'WORDLE';
+    pushAll('HARUNA', game);
+    game.makeAGuess();
+    pushAll('HARUNB', game);
+    game.makeAGuess();
+    pushAll('HARUNC', game);
+    game.makeAGuess();
+    pushAll('HARUND', game); //
+    game.makeAGuess();
+    expect(game.guess).toBe('HARUND');
+    pushAll('HARUNE', game);
+    game.makeAGuess();
+    expect(game.guess).toBe('HARUNE');
+    pushAll('WORDLE', game);
+    game.makeAGuess();
+    expect(game.guess).toBe('WORDLE');
+
+    expect(game.result).toBe('success');
   });
 });

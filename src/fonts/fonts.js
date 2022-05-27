@@ -15,7 +15,7 @@ export default createGlobalStyle`
         font-style: normal;
     }
     @font-face {
-        font-family: 'Font Name2';
+        font-family: 'hogBoldHMK';
         src: local('Font Name2'), local('FontName2'),
         url(${hogBoldHMK2}) format('woff2'),
         url(${hogBoldHMK}) format('woff');

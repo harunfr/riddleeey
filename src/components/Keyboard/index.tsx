@@ -5,7 +5,7 @@ import { Container, Row, Key } from './styles';
 
 const firstRow = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'];
 const secondRow = ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'];
-const thirdRow = ['ENTER', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'Back-Space'];
+const thirdRow = ['ENTER', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'Backspace'];
 function Header() {
   return (
     <Container>
@@ -21,7 +21,9 @@ function Header() {
       </Row>
       <Row>
         {thirdRow.map((keyName) => (
-          <Key key={uuidv4()}>{keyName}</Key>
+          <Key keyName={keyName} key={uuidv4()}>
+            {keyName}
+          </Key>
         ))}
       </Row>
     </Container>

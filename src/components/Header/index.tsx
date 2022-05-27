@@ -18,7 +18,7 @@ function Header() {
         <HowTo>H</HowTo>
       </Wrapper>
 
-      <Logo>Riddle</Logo>
+      <Logo>Riddleeey</Logo>
 
       <Wrapper>
         <Statistics>S</Statistics>

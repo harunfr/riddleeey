@@ -40,19 +40,19 @@ export default class Game {
     this.guesses = [];
   }
 
-  public get currentRow(): Cell[] {
-    return this.cellsStack[this.guessCount];
-  }
+  // public get currentRow(): Cell[] {
+  //   return this.cellsStack[this.guessCount];
+  // }
 
-  public get currentCell(): Cell {
-    return this.currentRow[this.addingOrder];
-  }
+  // public get currentCell(): Cell {
+  //   return this.cellsStack[this.guessCount][this.addingOrder];
+  // }
 
   firstTurnAdd(cellInput: string) {
-    if (!this.currentCell) {
-      this.currentRow.push({ letter: cellInput });
+    if (!this.cellsStack[this.guessCount][this.addingOrder]) {
+      this.cellsStack[this.guessCount].push({ letter: cellInput });
     } else {
-      this.currentCell.letter = cellInput;
+      this.cellsStack[this.guessCount][this.addingOrder].letter = cellInput;
     }
     this.addingOrder += 1;
   }
@@ -60,7 +60,14 @@ export default class Game {
   nextTurnAdd(cellInput: string) {
     const isOnLimit = this.addingOrder === this.answer.length;
     if (!isOnLimit) {
-      this.currentCell.letter = cellInput;
+      // console.log({
+      //   cellStack: this.cellsStack,
+      //   guessCount: this.guessCount,
+      //   addingOrder: this.addingOrder,
+      //   cellInput,
+      // });
+
+      this.cellsStack[this.guessCount][this.addingOrder].letter = cellInput;
       this.addingOrder += 1;
     }
   }
@@ -74,7 +81,11 @@ export default class Game {
   add(cellInput: string) {
     cellInput = cellInput.toUpperCase();
     const hasRoomForLetter = this.addingOrder < 8;
-    if (!hasRoomForLetter || !this.isValidInput(cellInput)) {
+    if (
+      !hasRoomForLetter
+      || !this.isValidInput(cellInput)
+      || this.result === 'success'
+    ) {
       return;
     }
 
@@ -88,8 +99,8 @@ export default class Game {
   }
 
   handleFirstTurnDelete(lastCell: Cell) {
-    if (this.currentRow.length > 3) {
-      this.currentRow.pop();
+    if (this.cellsStack[this.guessCount].length > 3) {
+      this.cellsStack[this.guessCount].pop();
     } else {
       lastCell.letter = null;
     }
@@ -100,11 +111,11 @@ export default class Game {
   }
 
   delete() {
-    const currentRow = this.currentRow;
+    const currentRow = this.cellsStack[this.guessCount];
     if (currentRow[0].letter === null) {
       return;
     }
-    const lastcellHasLetter = this.currentRow[this.addingOrder - 1];
+    const lastcellHasLetter = this.cellsStack[this.guessCount][this.addingOrder - 1];
 
     if (this.guessCount === 0) {
       this.handleFirstTurnDelete(lastcellHasLetter);
@@ -116,7 +127,7 @@ export default class Game {
   }
 
   handleFirstGuess() {
-    const currentRow = this.currentRow;
+    const currentRow = this.cellsStack[this.guessCount];
 
     if (currentRow.length < this.answer.length) {
       while (currentRow.length < this.answer.length) {
@@ -137,18 +148,17 @@ export default class Game {
   }
 
   makeAGuess() {
-    this.guess = this.currentRow.reduce((joined, cell) => {
+    this.guess = this.cellsStack[this.guessCount].reduce((joined, cell) => {
       if (cell.letter) {
         return joined + cell.letter;
       }
       return joined;
     }, '');
 
-    const currentRow = this.currentRow;
-
     const isSameGuess = this.guesses.indexOf(this.guess) !== -1;
 
     if (isSameGuess || this.guess.length < 3) {
+      // console.log({isSameGuess, thisGuessLength: this.guess.length});
       return;
     }
 
@@ -165,14 +175,12 @@ export default class Game {
       this.result = 'success';
     }
 
-    this.guessCount += 1;
+    // console.log('aaa');
 
-    if (this.guessCount > 5) {
-      this.result = 'failure';
-    }
+    // console.log({thisGuessCount: this.guessCount});
 
     // mark cells correct, present or absent.
-    currentRow.forEach((cell, position) => {
+    this.cellsStack[this.guessCount].forEach((cell, position) => {
       if (!cell.letter) {
         return;
       }
@@ -186,6 +194,14 @@ export default class Game {
         cell.status = 'absent';
       }
     });
+    this.guessCount += 1;
+    // handle last chance.
+    if (this.guessCount === 6) {
+      this.result = 'failure';
+    }
+    if (this.isGuessed) {
+      this.result = 'success';
+    }
     this.guesses.push(this.guess);
     this.addingOrder = 0;
   }

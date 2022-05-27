@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
 *{
@@ -10,7 +10,10 @@ export default createGlobalStyle`
 }
 #root{
   margin:0 auto;
-  background-color: gray;
-  height: 100vh;
 }
+`;
+
+export const MainWrapper = styled.div`
+  display: grid;
+  row-gap: 1rem;
 `;

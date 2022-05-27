@@ -1,9 +1,8 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useState } from 'react';
 
 import GlobalFonts from './fonts/fonts';
-import GlobalStyle from './styles/global'; // eslint-disable-next-line
-import Game from './Game/Game';
+import GlobalStyle, { MainWrapper } from './styles/global'; // eslint-disable-next-line
 
 import Header from './components/Header';
 import InputArea from './components/InputArea';
@@ -12,14 +11,14 @@ import Keyboard from './components/Keyboard';
 
 function App() {
   return (
-    <>
+    <MainWrapper>
       <GlobalStyle />
       <GlobalFonts />
       <Header />
       <InputArea />
       <Riddle />
       <Keyboard />
-    </>
+    </MainWrapper>
   );
 }
 

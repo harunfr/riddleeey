@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable no-lone-blocks */
 import styled, { css, keyframes } from 'styled-components';
 
@@ -61,11 +62,11 @@ const foldReverseMixin = css`
 export const Container = styled.div<{ turn: number }>`
   overflow: hidden;
   margin: 0 auto;
-  border: 2px solid goldenrod;
+  /* border: 2px solid goldenrod; */
   display: grid;
   row-gap: 5px;
 
-  > :nth-child(odd) {
+  /* > :nth-child(odd) {
     transform-origin: bottom center;
     animation: ${fold} 1s linear 1 forwards;
   }
@@ -90,7 +91,7 @@ export const Container = styled.div<{ turn: number }>`
   }
   > :nth-child(6) {
     ${(props) => (props.turn > 4 ? 'animation: none;' : foldMixin)};
-  }
+  } */
 `;
 
 export const Row = styled.div<{ turn?: number }>`
@@ -103,23 +104,26 @@ export const Row = styled.div<{ turn?: number }>`
 `;
 
 export const Cell = styled.div<{ turn?: number; status?: string }>`
-  border: 1px solid black;
+  border: 2px solid #d3d6da;
   width: 62px;
   height: 62px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${(props) =>
-    props.status === 'correct'
-      ? '#6AAA64'
-      : props.status === 'present'
+  font-size: 2rem;
+  font-weight: bold;
+  color: ${(props) => (props.status ? '#fff' : '#111')};
+  background-color: ${(props) => (props.status === 'correct'
+    ? '#6AAA64'
+    : props.status === 'present'
       ? '#C9B458'
       : props.status === 'absent'
-      ? '#787C7E'
-      : null};
+        ? '#787C7E'
+        : null)};
 `;
 
 export const DecorativeContainer = styled(Row)`
+  padding-left: 5px;
   & > * {
     animation: ${fadeOutIn} 1.5s linear infinite forwards;
     background-color: green;
@@ -134,4 +138,8 @@ export const DecorativeContainer = styled(Row)`
     animation-delay: 0.9s;
   }
 `;
-export const DecorativeCell = styled(Cell)``;
+export const DecorativeCell = styled(Cell)`
+  width: 62px;
+  height: 62px;
+  border: none;
+`;

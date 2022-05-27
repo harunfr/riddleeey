@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React, { useEffect, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -31,17 +32,11 @@ function InputArea() {
       }
       setCellsStack(game.current.cellsStack.slice());
       const resultClone = game.current.result;
-      if (resultClone) {
-        console.log('game is over, result: ' + resultClone);
-      }
       setGameStatus(resultClone);
       const addingOrderClone = game.current.addingOrder;
-      // console.log({ fromHandler: game.addingOrder });
       if (game.current.addingOrder >= 4) {
         setAddingOrder(addingOrderClone + 2);
       }
-      // console.log({ addingOrder });
-      // console.log({ gameAddingOrder: game.addingOrder });
     };
     window.addEventListener('keydown', keyDownHandler);
     return () => {
