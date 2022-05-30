@@ -62,7 +62,10 @@ const foldReverseMixin = css`
   animation: ${foldReverse} 2s linear 1 forwards;
 `;
 
-export const Container = styled.div<{ turn: number }>`
+export const Container = styled.div<{
+  turn: number;
+  gameStatus: null | string;
+}>`
   overflow: hidden;
   margin: 0 auto;
   /* border: 2px solid goldenrod; */
@@ -78,22 +81,33 @@ export const Container = styled.div<{ turn: number }>`
     animation: ${foldReverse} 1s linear 1 forwards;
   }
   > :nth-child(1) {
-    animation: none;
+    /* animation: none; */
+    ${(props) =>
+      props.turn > -1 && !props.gameStatus ? 'animation: none;' : foldMixin};
   }
   > :nth-child(2) {
-    ${(props) => (props.turn > 0 ? 'animation: none;' : foldMixin)};
+    ${(props) =>
+      props.turn > 0 && !props.gameStatus ? 'animation: none;' : foldMixin};
   }
   > :nth-child(3) {
-    ${(props) => (props.turn > 1 ? 'animation: none;' : foldReverseMixin)};
+    ${(props) =>
+      props.turn > 1 && !props.gameStatus
+        ? 'animation: none;'
+        : foldReverseMixin};
   }
   > :nth-child(4) {
-    ${(props) => (props.turn > 2 ? 'animation: none;' : foldMixin)};
+    ${(props) =>
+      props.turn > 2 && !props.gameStatus ? 'animation: none;' : foldMixin};
   }
   > :nth-child(5) {
-    ${(props) => (props.turn > 3 ? 'animation: none;' : foldReverseMixin)};
+    ${(props) =>
+      props.turn > 3 && !props.gameStatus
+        ? 'animation: none;'
+        : foldReverseMixin};
   }
   > :nth-child(6) {
-    ${(props) => (props.turn > 4 ? 'animation: none;' : foldMixin)};
+    ${(props) =>
+      props.turn > 4 && !props.gameStatus ? 'animation: none;' : foldMixin};
   }
   > :nth-child(7) {
     animation: none;

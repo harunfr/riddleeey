@@ -1,7 +1,7 @@
 {
-  "name": "react-app-setup",
+  "name": "ridleeey",
   "version": "0.1.0",
-  "homepage": "https://myusername.github.io/my-app",
+  "homepage": "https://harunfr.github.io/riddle-wordle",
   "private": true,
   "dependencies": {
     "@types/node": "^16.11.27",

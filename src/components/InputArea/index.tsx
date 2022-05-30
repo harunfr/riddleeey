@@ -14,6 +14,8 @@ interface InputAreaProps {
 }
 
 function InputArea({ answer }: InputAreaProps) {
+  // console.log('InputArea is rendered');
+
   const game = useRef(new Game());
   game.current.answer = answer.toUpperCase();
 
@@ -57,7 +59,7 @@ function InputArea({ answer }: InputAreaProps) {
   }, [addingOrder, turn, gameStatus, cellsStack]);
 
   return (
-    <Container turn={turn}>
+    <Container turn={turn} gameStatus={gameStatus}>
       {cellsStack.map((row, rowIndex) => (
         <Row turn={turn} key={rowIndex}>
           {row.map((cell, cellIndex) => (
@@ -86,6 +88,15 @@ function InputArea({ answer }: InputAreaProps) {
         {gameStatus}
         {' '}
         {gameStatus && game.current.answer}
+        {gameStatus === 'success' && (
+          <Row>
+            {game.current.cellsStack[turn - 1].map((cell) => (
+              <Cell status={cell.status} key={uuidv4()}>
+                {cell.letter}
+              </Cell>
+            ))}
+          </Row>
+        )}
         <br />
         {gameStatus && (
           <PlayAgainButton onClick={() => handleNewGame()}>
