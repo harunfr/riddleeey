@@ -4,23 +4,35 @@ import { v4 as uuidv4 } from 'uuid';
 
 import Game from '../../Game/Game';
 
-import { Container, Row, Cell } from './styles';
+import {
+  Container, Row, Cell, PlayAgainButton,
+} from './styles';
 import DecorativeCells from './DecorativeCells';
 
-function InputArea() {
+interface InputAreaProps {
+  answer: string;
+}
+
+function InputArea({ answer }: InputAreaProps) {
   const game = useRef(new Game());
-  game.current.answer = 'WORDLE';
+  game.current.answer = answer.toUpperCase();
 
   const [cellsStack, setCellsStack] = useState([
     ...game.current.cellsStack.slice(),
   ]);
   const [gameStatus, setGameStatus] = useState<null | string>(null);
   const [turn, setTurn] = useState(0);
-  const orerer = game.current.addingOrder + 2;
-  const [addingOrder, setAddingOrder] = useState(orerer);
+  const currentOrder = game.current.addingOrder + 2;
+  const [addingOrder, setAddingOrder] = useState(currentOrder);
+
+  const handleNewGame = () => {
+    game.current = new Game();
+    // console.log(game.current.cellsStack);
+    setCellsStack(game.current.cellsStack);
+  };
 
   useEffect(() => {
-    const keyDownHandler = (event: any) => {
+    const keyDownHandler = (event: { key: string }) => {
       if (event.key === 'Enter') {
         game.current.makeAGuess();
         const guessCountClone = game.current.guessCount;
@@ -55,11 +67,10 @@ function InputArea() {
                 turn={turn}
                 key={`${rowIndex}${cellIndex}`}
                 status={cell.status}
-                // onAnimationEnd={handleAnimationEnd}
               >
                 {cell.letter}
               </Cell>
-              {cellIndex === addingOrder && rowIndex === 0 && (
+              {turn === 0 && cellIndex >= addingOrder && rowIndex === 0 && (
                 <DecorativeCells />
               )}
             </div>
@@ -73,6 +84,14 @@ function InputArea() {
         }}
       >
         {gameStatus}
+        {' '}
+        {gameStatus && game.current.answer}
+        <br />
+        {gameStatus && (
+          <PlayAgainButton onClick={() => handleNewGame()}>
+            New Game
+          </PlayAgainButton>
+        )}
       </div>
     </Container>
   );

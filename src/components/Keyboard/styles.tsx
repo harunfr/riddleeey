@@ -1,3 +1,6 @@
+/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable no-confusing-arrow */
+/* eslint-disable indent */
 /* eslint-disable no-nested-ternary */
 import styled from 'styled-components';
 
@@ -26,9 +29,10 @@ export const Key = styled.div<{ keyName?: string }>`
   font-size: 0.85rem;
   background-color: #d3d6da;
   padding: 0
-    ${(props) => (props.keyName === 'ENTER'
-    ? '30'
-    : props.keyName === 'Backspace'
-      ? '40'
-      : '2')}px;
+    ${(props) =>
+      props.keyName === 'ENTER'
+        ? '30'
+        : props.keyName === 'Backspace'
+        ? '40'
+        : '2'}px;
 `;

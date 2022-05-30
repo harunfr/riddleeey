@@ -40,14 +40,6 @@ export default class Game {
     this.guesses = [];
   }
 
-  // public get currentRow(): Cell[] {
-  //   return this.cellsStack[this.guessCount];
-  // }
-
-  // public get currentCell(): Cell {
-  //   return this.cellsStack[this.guessCount][this.addingOrder];
-  // }
-
   firstTurnAdd(cellInput: string) {
     if (!this.cellsStack[this.guessCount][this.addingOrder]) {
       this.cellsStack[this.guessCount].push({ letter: cellInput });
@@ -60,13 +52,6 @@ export default class Game {
   nextTurnAdd(cellInput: string) {
     const isOnLimit = this.addingOrder === this.answer.length;
     if (!isOnLimit) {
-      // console.log({
-      //   cellStack: this.cellsStack,
-      //   guessCount: this.guessCount,
-      //   addingOrder: this.addingOrder,
-      //   cellInput,
-      // });
-
       this.cellsStack[this.guessCount][this.addingOrder].letter = cellInput;
       this.addingOrder += 1;
     }
@@ -80,11 +65,11 @@ export default class Game {
 
   add(cellInput: string) {
     cellInput = cellInput.toUpperCase();
-    const hasRoomForLetter = this.addingOrder < 8;
+    const hasRoomForLetter = this.addingOrder < 12;
     if (
-      !hasRoomForLetter
-      || !this.isValidInput(cellInput)
-      || this.result === 'success'
+      !hasRoomForLetter ||
+      !this.isValidInput(cellInput) ||
+      this.result === 'success'
     ) {
       return;
     }
@@ -115,7 +100,8 @@ export default class Game {
     if (currentRow[0].letter === null) {
       return;
     }
-    const lastcellHasLetter = this.cellsStack[this.guessCount][this.addingOrder - 1];
+    const lastcellHasLetter =
+      this.cellsStack[this.guessCount][this.addingOrder - 1];
 
     if (this.guessCount === 0) {
       this.handleFirstTurnDelete(lastcellHasLetter);
@@ -158,7 +144,6 @@ export default class Game {
     const isSameGuess = this.guesses.indexOf(this.guess) !== -1;
 
     if (isSameGuess || this.guess.length < 3) {
-      // console.log({isSameGuess, thisGuessLength: this.guess.length});
       return;
     }
 
@@ -170,14 +155,10 @@ export default class Game {
     }
 
     // handle if answer is correct.
-    this.isGuessed = this.guess === this.answer;
+    this.isGuessed = this.guess === this.answer.toUpperCase();
     if (this.isGuessed) {
       this.result = 'success';
     }
-
-    // console.log('aaa');
-
-    // console.log({thisGuessCount: this.guessCount});
 
     // mark cells correct, present or absent.
     this.cellsStack[this.guessCount].forEach((cell, position) => {

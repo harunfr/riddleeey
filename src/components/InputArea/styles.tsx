@@ -1,3 +1,6 @@
+/* eslint-disable indent */
+/* eslint-disable no-confusing-arrow */
+/* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-lone-blocks */
 import styled, { css, keyframes } from 'styled-components';
@@ -66,7 +69,7 @@ export const Container = styled.div<{ turn: number }>`
   display: grid;
   row-gap: 5px;
 
-  /* > :nth-child(odd) {
+  > :nth-child(odd) {
     transform-origin: bottom center;
     animation: ${fold} 1s linear 1 forwards;
   }
@@ -91,7 +94,10 @@ export const Container = styled.div<{ turn: number }>`
   }
   > :nth-child(6) {
     ${(props) => (props.turn > 4 ? 'animation: none;' : foldMixin)};
-  } */
+  }
+  > :nth-child(7) {
+    animation: none;
+  }
 `;
 
 export const Row = styled.div<{ turn?: number }>`
@@ -113,13 +119,14 @@ export const Cell = styled.div<{ turn?: number; status?: string }>`
   font-size: 2rem;
   font-weight: bold;
   color: ${(props) => (props.status ? '#fff' : '#111')};
-  background-color: ${(props) => (props.status === 'correct'
-    ? '#6AAA64'
-    : props.status === 'present'
+  background-color: ${(props) =>
+    props.status === 'correct'
+      ? '#6AAA64'
+      : props.status === 'present'
       ? '#C9B458'
       : props.status === 'absent'
-        ? '#787C7E'
-        : null)};
+      ? '#787C7E'
+      : null};
 `;
 
 export const DecorativeContainer = styled(Row)`
@@ -143,3 +150,5 @@ export const DecorativeCell = styled(Cell)`
   height: 62px;
   border: none;
 `;
+
+export const PlayAgainButton = styled.button``;

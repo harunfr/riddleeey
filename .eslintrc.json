@@ -25,6 +25,7 @@
     "react/require-default-props": "off",
     "class-methods-use-this": "off",
     "no-param-reassign": "off",
+    "operator-linebreak": "off",
     "react/jsx-filename-extension": [
       2,
       { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
