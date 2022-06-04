@@ -3,64 +3,17 @@
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-lone-blocks */
-import styled, { css, keyframes } from 'styled-components';
+import styled from 'styled-components';
 
-const fold = keyframes`
-  0% {
-    opacity: 1;
-    height: 62px;
-    transform: rotate3d(1, 0, 0, 0deg) skewX(0deg);
-    display: flex;
-  }
-  80% {
-    height: 30px;
-    transform: rotate3d(1, 0, 0, 90deg) skewX(20deg);
-    display: none;
-  }
-  100% {
-    opacity: 0;
-    height: 0px;
-    transform: rotate3d(1, 0, 0, 90deg) skewX(60deg);
-    display: none;
-  }
-`;
-
-const foldReverse = keyframes`
-  0% {
-    opacity: 1;
-    height: 62px;
-    transform: rotate3d(1, 0, 0, 0deg) skewX(0deg);
-    display: flex;
-  }
-  80% {
-    height: 30px;
-    transform: rotate3d(1, 0, 0, 90deg) skewX(-20deg);
-    display: none;
-  }
-  100% {
-    opacity: 0;
-    height: 0px;
-    transform: rotate3d(1, 0, 0, 90deg) skewX(60deg);
-    display: none;
-  }
-`;
-
-const fadeOutIn = keyframes`
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0.2;
-  }
-`;
-
-const foldMixin = css`
-  animation: ${fold} 2s linear 1 forwards;
-`;
-
-const foldReverseMixin = css`
-  animation: ${foldReverse} 2s linear 1 forwards;
-`;
+import {
+  fadeOutIn,
+  fold,
+  foldReverse,
+  foldMixin,
+  unfoldMixin,
+  foldReverseMixin,
+  unfoldReverseMixin,
+} from './animations.styled';
 
 export const Container = styled.div<{
   turn: number;
@@ -93,31 +46,31 @@ export const Container = styled.div<{
     ${(props) =>
       // eslint-disable-next-line no-mixed-operators
       (props.turn > 0 && !props.gameStatus) || props.showGuesses
-        ? 'animation: none;'
+        ? unfoldMixin
         : foldMixin};
   }
   > :nth-child(3) {
     ${(props) =>
       (props.turn > 1 && !props.gameStatus) || props.showGuesses
-        ? 'animation: none;'
+        ? unfoldReverseMixin
         : foldReverseMixin};
   }
   > :nth-child(4) {
     ${(props) =>
       (props.turn > 2 && !props.gameStatus) || props.showGuesses
-        ? 'animation: none;'
+        ? unfoldMixin
         : foldMixin};
   }
   > :nth-child(5) {
     ${(props) =>
       (props.turn > 3 && !props.gameStatus) || props.showGuesses
-        ? 'animation: none;'
+        ? unfoldReverseMixin
         : foldReverseMixin};
   }
   > :nth-child(6) {
     ${(props) =>
       (props.turn > 4 && !props.gameStatus) || props.showGuesses
-        ? 'animation: none;'
+        ? unfoldMixin
         : foldMixin};
   }
   > :nth-child(7) {
@@ -158,7 +111,7 @@ export const DecorativeContainer = styled(Row)`
   padding-left: 5px;
   & > * {
     animation: ${fadeOutIn} 1.5s linear infinite forwards;
-    background-color: green;
+    background-color: #6aaa64;
     color: #fff;
   }
   & > :nth-child(1) {
@@ -171,6 +124,7 @@ export const DecorativeContainer = styled(Row)`
     animation-delay: 0.9s;
   }
 `;
+
 export const DecorativeCell = styled(Cell)`
   width: 62px;
   height: 62px;

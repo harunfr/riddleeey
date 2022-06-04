@@ -2,7 +2,6 @@ import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { Cell as LetterCell } from '../../Game/Game';
-
 import { Cell, Row } from '../InputArea/styles';
 
 import {
@@ -15,7 +14,7 @@ import {
   LoopIcon,
 } from './styles';
 
-interface HeaderProps {
+interface GameEndInfoProps {
   gameStatus: string | null;
   answer: string;
   turn: number;
@@ -33,7 +32,7 @@ function GameEndInfo({
   showGuesses,
   showGuessHandler,
   handleNewGame,
-}: HeaderProps) {
+}: GameEndInfoProps) {
   return (
     <Container>
       {gameStatus === 'failure' && (

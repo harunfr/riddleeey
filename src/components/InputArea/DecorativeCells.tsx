@@ -13,7 +13,3 @@ function DecorativeCells() {
 }
 
 export default DecorativeCells;
-
-// {cellIndex === addingOrder && rowIndex === 0 && (
-//   <DecorativeCells />
-// )}

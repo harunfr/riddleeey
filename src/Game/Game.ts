@@ -40,14 +40,8 @@ export default class Game {
     this.guesses = [];
   }
 
-  // cellsStack: Cell[][] = [
-  //   [{ letter: null }, { letter: null }, { letter: null }],
-  //   [{ letter: null }, { letter: null }, { letter: null }],
-  //   [{ letter: null }, { letter: null }, { letter: null }],
-  //   [{ letter: null }, { letter: null }, { letter: null }],
-  //   [{ letter: null }, { letter: null }, { letter: null }],
-  //   [{ letter: null }, { letter: null }, { letter: null }],
-  // ];
+  // prettier-ignore
+  letters = {A: null, B: null, C: null, D: null, E: null, F: null, G: null, H: null, I: null, J: null, K: null, L: null, M:  null, N: null, O: null, P: null, Q: null, R: null, S: null, T: null, U: null, V: null, W: null, X: null, Y: null, Z: null}; // eslint-disable-line
 
   firstTurnAdd(cellInput: string) {
     if (!this.cellsStack[this.guessCount][this.addingOrder]) {
@@ -154,20 +148,31 @@ export default class Game {
     if (this.isGuessed) {
       this.result = 'success';
     }
+    // mark keyboard keys
+    // this.cellsStack[this.guessCount].forEach(() => {
+
+    // })
 
     // mark cells correct, present or absent.
     this.cellsStack[this.guessCount].forEach((cell, position) => {
+      // for first turn
       if (!cell.letter) {
         return;
       }
       if (cell.letter && this.answer.includes(cell.letter)) {
         if (cell.letter === this.answer[position]) {
           cell.status = 'correct';
+          // @ts-ignore
+          this.letters[cell.letter] = 'correct';
         } else {
           cell.status = 'present';
+          // @ts-ignore
+          this.letters[cell.letter] = 'present';
         }
       } else {
         cell.status = 'absent';
+        // @ts-ignore
+        this.letters[cell.letter] = 'absent';
       }
     });
     this.guessCount += 1;

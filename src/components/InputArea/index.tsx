@@ -27,7 +27,6 @@ function InputArea({
         <Row turn={turn} key={rowIndex}>
           {row.map((cell, cellIndex) => (
             <Row key={uuidv4()}>
-              {/* please extract me as wrapper ;/ */}
               <Cell
                 turn={turn}
                 key={`${rowIndex}${cellIndex}`}

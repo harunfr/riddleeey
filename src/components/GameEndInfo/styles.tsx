@@ -6,7 +6,6 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* outline: 5px solid red; */
   row-gap: 1.5rem;
 `;
 
@@ -30,9 +29,9 @@ const ResultSectionButton = styled.button`
 export const PlayAgainButton = styled(ResultSectionButton)`
   background-color: #6aaa64;
 `;
+
 export const Answer = styled.div`
   font-size: 1.6rem;
-  /* text-transform: uppercase; */
 `;
 
 export const AnswerText = styled.span`
@@ -40,10 +39,10 @@ export const AnswerText = styled.span`
   font-weight: bold;
 `;
 
-export const WWWWWWWWWWWWWWW = styled.div``;
 export const ShowGuessButton = styled(ResultSectionButton)`
   background-color: #c9b458;
 `;
+
 export const ResultsWrapper = styled.div`
   display: flex;
   column-gap: 2rem;

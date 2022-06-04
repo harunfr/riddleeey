@@ -12,7 +12,6 @@ import {
 } from './styles';
 
 function Header() {
-  // console.log('Header component is rendered!');
   return (
     <Container>
       <Wrapper>
@@ -35,10 +34,5 @@ function Header() {
     </Container>
   );
 }
-
-// export default React.memo(
-//   Header,
-//   (prevProps, nextProps) => prevProps === nextProps,
-// );
 
 export default Header;
