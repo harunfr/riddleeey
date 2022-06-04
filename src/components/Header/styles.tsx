@@ -33,6 +33,15 @@ export const Logo = styled.div`
   font-family: 'hogBoldHMK';
   font-size: 2rem;
   font-weight: 600;
+  & > :nth-child(1) {
+    color: #6aaa64;
+  }
+  & > :nth-child(2) {
+    color: #c9b458;
+  }
+  & > :nth-child(3) {
+    color: #39a2d6;
+  }
 `;
 
 export const Statistics = styled(BiBarChartAlt2)`
@@ -43,4 +52,9 @@ export const Statistics = styled(BiBarChartAlt2)`
 export const Settings = styled(FcSettings)`
   font-size: 1.5rem;
   cursor: pointer;
+`;
+
+export const Colorful = styled.span`
+  /* color:red; */
+  font-family: 'hogBoldHMK';
 `;

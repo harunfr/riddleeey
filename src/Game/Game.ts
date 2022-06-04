@@ -66,22 +66,8 @@ export default class Game {
     }
   }
 
-  isValidInput(input: string) {
-    const onlyLetterRegex = /^[a-zA-Z]$/;
-    const isValid: boolean = onlyLetterRegex.test(input);
-    return isValid;
-  }
-
   add(cellInput: string) {
     cellInput = cellInput.toUpperCase();
-    const hasRoomForLetter = this.addingOrder < 12;
-    if (
-      !hasRoomForLetter ||
-      !this.isValidInput(cellInput) ||
-      this.result === 'success'
-    ) {
-      return;
-    }
 
     const isFirstGuess = this.guessCount === 0;
 

@@ -65,6 +65,7 @@ const foldReverseMixin = css`
 export const Container = styled.div<{
   turn: number;
   gameStatus: null | string;
+  showGuesses: boolean;
 }>`
   overflow: hidden;
   margin: 0 auto;
@@ -83,31 +84,41 @@ export const Container = styled.div<{
   > :nth-child(1) {
     /* animation: none; */
     ${(props) =>
-      props.turn > -1 && !props.gameStatus ? 'animation: none;' : foldMixin};
+      // @ts-ignore
+      (props.turn > -1 && !props.gameStatus) || props.showGuesses
+        ? 'animation: none;'
+        : foldMixin};
   }
   > :nth-child(2) {
     ${(props) =>
-      props.turn > 0 && !props.gameStatus ? 'animation: none;' : foldMixin};
+      // eslint-disable-next-line no-mixed-operators
+      (props.turn > 0 && !props.gameStatus) || props.showGuesses
+        ? 'animation: none;'
+        : foldMixin};
   }
   > :nth-child(3) {
     ${(props) =>
-      props.turn > 1 && !props.gameStatus
+      (props.turn > 1 && !props.gameStatus) || props.showGuesses
         ? 'animation: none;'
         : foldReverseMixin};
   }
   > :nth-child(4) {
     ${(props) =>
-      props.turn > 2 && !props.gameStatus ? 'animation: none;' : foldMixin};
+      (props.turn > 2 && !props.gameStatus) || props.showGuesses
+        ? 'animation: none;'
+        : foldMixin};
   }
   > :nth-child(5) {
     ${(props) =>
-      props.turn > 3 && !props.gameStatus
+      (props.turn > 3 && !props.gameStatus) || props.showGuesses
         ? 'animation: none;'
         : foldReverseMixin};
   }
   > :nth-child(6) {
     ${(props) =>
-      props.turn > 4 && !props.gameStatus ? 'animation: none;' : foldMixin};
+      (props.turn > 4 && !props.gameStatus) || props.showGuesses
+        ? 'animation: none;'
+        : foldMixin};
   }
   > :nth-child(7) {
     animation: none;
@@ -165,5 +176,3 @@ export const DecorativeCell = styled(Cell)`
   height: 62px;
   border: none;
 `;
-
-export const PlayAgainButton = styled.button``;

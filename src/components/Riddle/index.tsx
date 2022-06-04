@@ -4,12 +4,17 @@ import { Container, Title, TodaysRiddle } from './styles';
 
 interface RiddleProps {
   riddle: string;
+  isRiddleFetched: boolean;
 }
 
-function Riddle({ riddle }: RiddleProps) {
+function Riddle({ riddle, isRiddleFetched }: RiddleProps) {
+  const fetchedRiddleMessage = 'Today’s riddle';
+  const waitingFetchMessage = 'Fetching riddle from database.';
   return (
     <Container>
-      <Title>Today’s riddle</Title>
+      <Title>
+        {isRiddleFetched ? fetchedRiddleMessage : waitingFetchMessage}
+      </Title>
       <TodaysRiddle>
         &quot;
         {riddle}

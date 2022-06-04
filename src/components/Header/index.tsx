@@ -8,6 +8,7 @@ import {
   Logo,
   Statistics,
   Settings,
+  Colorful,
 } from './styles';
 
 function Header() {
@@ -19,7 +20,13 @@ function Header() {
         <HowTo>H</HowTo>
       </Wrapper>
 
-      <Logo>Riddleeey</Logo>
+      <Logo>
+        Riddl
+        <Colorful>e</Colorful>
+        <Colorful>e</Colorful>
+        <Colorful>e</Colorful>
+        y
+      </Logo>
 
       <Wrapper>
         <Statistics>S</Statistics>

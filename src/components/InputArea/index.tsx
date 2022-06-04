@@ -2,7 +2,7 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import { Container, Row, Cell /* PlayAgainButton, */ } from './styles';
+import { Container, Row, Cell } from './styles';
 import DecorativeCells from './DecorativeCells';
 import { Cell as LetterCell } from '../../Game/Game';
 
@@ -11,6 +11,7 @@ interface InputAreaProps {
   gameStatus: string | null;
   turn: number;
   addingOrder: number;
+  showGuesses: boolean;
 }
 
 function InputArea({
@@ -18,13 +19,14 @@ function InputArea({
   gameStatus,
   cellsStack,
   addingOrder,
+  showGuesses,
 }: InputAreaProps) {
   return (
-    <Container turn={turn} gameStatus={gameStatus}>
+    <Container turn={turn} gameStatus={gameStatus} showGuesses={showGuesses}>
       {cellsStack.map((row, rowIndex) => (
         <Row turn={turn} key={rowIndex}>
           {row.map((cell, cellIndex) => (
-            <div key={uuidv4()} style={{ display: 'flex' }}>
+            <Row key={uuidv4()}>
               {/* please extract me as wrapper ;/ */}
               <Cell
                 turn={turn}
@@ -36,29 +38,10 @@ function InputArea({
               {turn === 0 && cellIndex >= addingOrder + 2 && rowIndex === 0 && (
                 <DecorativeCells />
               )}
-            </div>
+            </Row>
           ))}
         </Row>
       ))}
-      {/* <div
-        style={{
-          fontSize: '40px',
-          fontWeight: '700',
-        }}
-      >
-        {gameStatus} {gameStatus && answer}
-        {gameStatus === 'success' && (
-          <Row>
-            {cellsStack[turn - 1].map((cell) => (
-              <Cell status={cell.status} key={uuidv4()}>
-                {cell.letter}
-              </Cell>
-            ))}
-          </Row>
-        )}
-        <br />
-        {gameStatus && <PlayAgainButton>New Game</PlayAgainButton>}
-      </div> */}
     </Container>
   );
 }
