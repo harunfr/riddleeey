@@ -3,23 +3,27 @@ import React from 'react';
 import {
   Container,
   Wrapper,
-  // Menu,
   HowTo,
   Logo,
-  // Statistics,
-  Settings,
+  ButtonToDark,
   Colorful,
+  ButtonToLight,
 } from './styles';
 
 interface HeaderProps {
+  theme: string;
   handleShowHowToClick: () => void;
+  handleToggleTheme: () => void;
 }
 
-function Header({ handleShowHowToClick }: HeaderProps) {
+function Header({
+  theme,
+  handleShowHowToClick,
+  handleToggleTheme,
+}: HeaderProps) {
   return (
     <Container>
       <Wrapper>
-        {/* <Menu>M</Menu> */}
         <HowTo onClick={handleShowHowToClick} />
       </Wrapper>
 
@@ -32,8 +36,11 @@ function Header({ handleShowHowToClick }: HeaderProps) {
       </Logo>
 
       <Wrapper>
-        {/* <Statistics>S</Statistics> */}
-        <Settings />
+        {theme === 'light' ? (
+          <ButtonToDark onClick={handleToggleTheme} />
+        ) : (
+          <ButtonToLight onClick={handleToggleTheme} />
+        )}
       </Wrapper>
     </Container>
   );

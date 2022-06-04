@@ -22,7 +22,7 @@ export const fold = keyframes`
 
 export const unfold = keyframes`
 0% {
-    opacity: 0;
+    opacity: 1;
     height: 0px;
     transform: rotate3d(1, 0, 0, 90deg) skewX(60deg);
     display: none;
@@ -33,7 +33,6 @@ export const unfold = keyframes`
     display: none;
   }
   100% {
-    opacity: 1;
     height: 62px;
     transform: rotate3d(1, 0, 0, 0deg) skewX(0deg);
     display: flex;
@@ -47,13 +46,12 @@ export const foldReverse = keyframes`
     transform: rotate3d(1, 0, 0, 0deg) skewX(0deg);
     display: flex;
   }
-  80% {
+  /* 80% {
     height: 30px;
     transform: rotate3d(1, 0, 0, 90deg) skewX(-20deg);
     display: none;
-  }
+  } */
   100% {
-    opacity: 0;
     height: 0px;
     transform: rotate3d(1, 0, 0, 90deg) skewX(60deg);
     display: none;
@@ -67,11 +65,11 @@ export const unfoldReverse = keyframes`
     transform: rotate3d(1, 0, 0, 90deg) skewX(60deg);
     display: none;
   }
-  80% {
+  /* 80% {
     height: 30px;
     transform: rotate3d(1, 0, 0, 90deg) skewX(-20deg);
     display: none;
-  }
+  } */
   100% {
     opacity: 1;
     height: 62px;

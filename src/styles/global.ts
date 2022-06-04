@@ -17,4 +17,18 @@ export const MainWrapper = styled.div`
   display: grid;
   row-gap: 1rem;
   position: relative;
+  background-color: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.color};
+  min-height: 100vh;
 `;
+
+export const lightTheme = {
+  color: '#333',
+  background: '#FFF',
+  howToColor: '#333',
+};
+export const darkTheme = {
+  color: '#5773ff',
+  background: '#101c29',
+  howToColor: '#ddd',
+};

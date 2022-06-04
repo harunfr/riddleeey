@@ -1,8 +1,8 @@
 import styled, { keyframes } from 'styled-components';
-import { FcSettings } from 'react-icons/fc';
-import { BiBarChartAlt2 } from 'react-icons/bi';
-import { GrCircleQuestion } from 'react-icons/gr';
+import { FaRegQuestionCircle } from 'react-icons/fa';
 import { GiHamburgerMenu } from 'react-icons/gi';
+import { FiSun } from 'react-icons/fi';
+import { BsFillMoonStarsFill } from 'react-icons/bs';
 
 export const changeColor = keyframes`
   0% {
@@ -23,6 +23,8 @@ export const Container = styled.div`
   border-bottom: 1px solid #d4d1d1;
   height: 52px;
   padding: 0 1rem;
+  background-color: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.color};
 `;
 
 export const Wrapper = styled.div`
@@ -35,13 +37,18 @@ export const Menu = styled(GiHamburgerMenu)`
   cursor: pointer;
 `;
 
-export const HowTo = styled(GrCircleQuestion)`
+export const HowTo = styled(FaRegQuestionCircle)`
   font-size: 1.5rem;
   cursor: pointer;
+  color: ${(props) => props.theme.color};
+  transition: color 0.7s ease;
+  &:hover {
+    color: goldenrod;
+  }
 `;
 
 export const Logo = styled.div`
-  font-family: 'hogBoldHMK';
+  font-family: "hogBoldHMK";
   font-size: 2rem;
   font-weight: 600;
   & > * {
@@ -61,17 +68,25 @@ export const Logo = styled.div`
   }
 `;
 
-export const Statistics = styled(BiBarChartAlt2)`
+export const ButtonToDark = styled(BsFillMoonStarsFill)`
   font-size: 1.5rem;
   cursor: pointer;
+  transition: color 0.7s ease;
+  &:hover {
+    color: #5773ff;
+  }
 `;
 
-export const Settings = styled(FcSettings)`
+export const ButtonToLight = styled(FiSun)`
   font-size: 1.5rem;
   cursor: pointer;
+  color: ${(props) => props.theme.color};
+  transition: color 0.7s ease;
+  &:hover {
+    color: #fff;
+  }
 `;
 
 export const Colorful = styled.span`
-  /* color:red; */
-  font-family: 'hogBoldHMK';
+  font-family: "hogBoldHMK";
 `;

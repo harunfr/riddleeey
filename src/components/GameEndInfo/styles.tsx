@@ -7,6 +7,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   row-gap: 1.5rem;
+  background-color: ${(props) => props.theme.background};
 `;
 
 const ResultSectionButton = styled.button`
@@ -32,6 +33,7 @@ export const PlayAgainButton = styled(ResultSectionButton)`
 
 export const Answer = styled.div`
   font-size: 1.6rem;
+  color: ${(props) => props.theme.color};
 `;
 
 export const AnswerText = styled.span`

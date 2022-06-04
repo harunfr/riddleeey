@@ -1,9 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useRef, useState } from 'react';
+import { ThemeProvider } from 'styled-components';
 
 import Game from './Game/Game';
 import GlobalFonts from './fonts/fonts';
-import GlobalStyle, { MainWrapper } from './styles/global';
+import GlobalStyle, { MainWrapper, lightTheme, darkTheme } from './styles/global';
 
 import Header from './components/Header';
 import InputArea from './components/InputArea';
@@ -21,6 +22,11 @@ function App() {
   // start game
   const game = useRef(new Game());
   const gameClone = { ...game.current };
+
+  // theme state and handler
+  const [theme, setTheme] = useState('light');
+  const isDarkTheme = theme === 'dark';
+  const handleToggleTheme = () => setTheme(isDarkTheme ? 'light' : 'dark');
 
   // modal states
   const [showHowTo, setshowHowTo] = useState(false);
@@ -177,34 +183,43 @@ function App() {
   }, [gameState, isRiddleFetched, setGameState]);
 
   return (
-    <MainWrapper>
-      <GlobalStyle />
-      <GlobalFonts />
-      {showHowTo && <HowToModal handleShowHowToClick={handleShowHowToClick} />}
-      <Header handleShowHowToClick={handleShowHowToClick} />
-      <InputArea
-        cellsStack={cellsStack}
-        gameStatus={gameStatus}
-        turn={turn}
-        addingOrder={addingOrder}
-        showGuesses={showGuesses}
-      />
-      <GameEndInfo
-        gameStatus={gameState.gameStatus}
-        answer={answer}
-        showGuessHandler={handleShowGuess}
-        cellsStack={cellsStack}
-        turn={turn}
-        showGuesses={showGuesses}
-        handleNewGame={handleNewGame}
-      />
-      <Riddle riddle={riddle} isRiddleFetched={isRiddleFetched} />
-      <Keyboard
-        // @ts-ignore
-        keyboardState={keyboardState}
-        keyClickHandler={handleKeyClick}
-      />
-    </MainWrapper>
+    <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
+      <MainWrapper>
+        <GlobalStyle />
+        <GlobalFonts />
+        {showHowTo && (
+          <HowToModal handleShowHowToClick={handleShowHowToClick} />
+        )}
+
+        <Header
+          handleShowHowToClick={handleShowHowToClick}
+          handleToggleTheme={handleToggleTheme}
+          theme={theme}
+        />
+        <InputArea
+          cellsStack={cellsStack}
+          gameStatus={gameStatus}
+          turn={turn}
+          addingOrder={addingOrder}
+          showGuesses={showGuesses}
+        />
+        <GameEndInfo
+          gameStatus={gameState.gameStatus}
+          answer={answer}
+          showGuessHandler={handleShowGuess}
+          cellsStack={cellsStack}
+          turn={turn}
+          showGuesses={showGuesses}
+          handleNewGame={handleNewGame}
+        />
+        <Riddle riddle={riddle} isRiddleFetched={isRiddleFetched} />
+        <Keyboard
+          // @ts-ignore
+          keyboardState={keyboardState}
+          keyClickHandler={handleKeyClick}
+        />
+      </MainWrapper>
+    </ThemeProvider>
   );
 }
 

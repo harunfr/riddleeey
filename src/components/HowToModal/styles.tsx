@@ -20,13 +20,13 @@ export const Container = styled.div`
   align-items: flex-start;
   width: 100vw;
   height: 100vh;
-  background-color: #fff;
   position: absolute;
   inset: 0;
   z-index: 3;
   padding-top: 1rem;
   font-size: 14px;
   padding: 1rem;
+  background-color: ${(props) => props.theme.background};
   animation: ${slideIn} 100ms linear;
 `;
 
@@ -41,6 +41,10 @@ export const CloseButton = styled(CgCloseO)`
   right: 0;
   font-size: 1.5rem;
   cursor: pointer;
+  transition: color 0.7s ease;
+  &:hover {
+    color: goldenrod;
+  }
 `;
 
 const GenericWrapper = styled.div`
@@ -74,6 +78,7 @@ export const DummyCell = styled(Cell)`
   width: 40px;
   height: 40px;
   border: 2px solid #878a8c;
+  color: ${(props) => props.theme.howToColor};
 `;
 
 export const ListWrapper = styled.ul`

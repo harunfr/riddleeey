@@ -22,9 +22,9 @@ export const Container = styled.div<{
 }>`
   overflow: hidden;
   margin: 0 auto;
-  /* border: 2px solid goldenrod; */
   display: grid;
   row-gap: 5px;
+  width: 100%;
 
   > :nth-child(odd) {
     transform-origin: bottom center;
@@ -35,7 +35,6 @@ export const Container = styled.div<{
     animation: ${foldReverse} 1s linear 1 forwards;
   }
   > :nth-child(1) {
-    /* animation: none; */
     ${(props) =>
       // @ts-ignore
       (props.turn > -1 && !props.gameStatus) || props.showGuesses
@@ -88,7 +87,6 @@ export const Row = styled.div<{ turn?: number }>`
 `;
 
 export const Cell = styled.div<{ turn?: number; status?: string }>`
-  /* border: 2px solid #d3d6da; */
   border: ${(props) => (!props.status ? '2px solid #d3d6da' : 'none')};
   width: 62px;
   height: 62px;
@@ -97,7 +95,7 @@ export const Cell = styled.div<{ turn?: number; status?: string }>`
   justify-content: center;
   font-size: 2rem;
   font-weight: bold;
-  color: ${(props) => (props.status ? '#fff' : '#111')};
+  color: ${(props) => props.theme.color};
   background-color: ${(props) =>
     props.status === 'correct'
       ? '#6AAA64'
