@@ -11,16 +11,12 @@ import {
   Colorful,
 } from './styles';
 
-interface HeaderProps {
-  handleShowHowToClick: () => void;
-}
-
-function Header({ handleShowHowToClick }: HeaderProps) {
+function Header() {
   return (
     <Container>
       <Wrapper>
         {/* <Menu>M</Menu> */}
-        <HowTo onClick={handleShowHowToClick} />
+        <HowTo />
       </Wrapper>
 
       <Logo>

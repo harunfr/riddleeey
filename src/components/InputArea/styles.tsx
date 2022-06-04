@@ -88,7 +88,8 @@ export const Row = styled.div<{ turn?: number }>`
 `;
 
 export const Cell = styled.div<{ turn?: number; status?: string }>`
-  border: 2px solid #d3d6da;
+  /* border: 2px solid #d3d6da; */
+  border: ${(props) => (!props.status ? '2px solid #d3d6da' : 'none')};
   width: 62px;
   height: 62px;
   display: flex;

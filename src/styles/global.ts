@@ -16,4 +16,5 @@ export default createGlobalStyle`
 export const MainWrapper = styled.div`
   display: grid;
   row-gap: 1rem;
+  position: relative;
 `;

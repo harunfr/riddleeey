@@ -10,6 +10,7 @@ import InputArea from './components/InputArea';
 import GameEndInfo from './components/GameEndInfo';
 import Riddle from './components/Riddle';
 import Keyboard from './components/Keyboard';
+import HowToModal from './components/HowToModal';
 
 export interface IKeyboardCell {
   children: string;
@@ -21,10 +22,13 @@ function App() {
   const game = useRef(new Game());
   const gameClone = { ...game.current };
 
+  // modal states
+  const [showHowTo, setshowHowTo] = useState(false);
+
   // keyboard letters state.
   const [keyboardState, setKeyboardState] = useState(gameClone.letters);
 
-  // initial states
+  // initial game states
   const [gameState, setGameState] = useState({
     cellsStack: gameClone.cellsStack,
     gameStatus: gameClone.result,
@@ -70,6 +74,10 @@ function App() {
 
   const handleShowGuess = (): void => {
     setShowGuesses(true);
+  };
+
+  const handleShowHowToClick = () => {
+    setshowHowTo(!showHowTo);
   };
 
   // to handle keyboard key click events on bottom
@@ -172,7 +180,8 @@ function App() {
     <MainWrapper>
       <GlobalStyle />
       <GlobalFonts />
-      <Header />
+      {showHowTo && <HowToModal handleShowHowToClick={handleShowHowToClick} />}
+      <Header handleShowHowToClick={handleShowHowToClick} />
       <InputArea
         cellsStack={cellsStack}
         gameStatus={gameStatus}
