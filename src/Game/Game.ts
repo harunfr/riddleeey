@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-syntax */
-interface Cell {
+export interface Cell {
   letter: string | null;
   status?: string;
 }
@@ -39,6 +39,15 @@ export default class Game {
     this.result = null;
     this.guesses = [];
   }
+
+  // cellsStack: Cell[][] = [
+  //   [{ letter: null }, { letter: null }, { letter: null }],
+  //   [{ letter: null }, { letter: null }, { letter: null }],
+  //   [{ letter: null }, { letter: null }, { letter: null }],
+  //   [{ letter: null }, { letter: null }, { letter: null }],
+  //   [{ letter: null }, { letter: null }, { letter: null }],
+  //   [{ letter: null }, { letter: null }, { letter: null }],
+  // ];
 
   firstTurnAdd(cellInput: string) {
     if (!this.cellsStack[this.guessCount][this.addingOrder]) {

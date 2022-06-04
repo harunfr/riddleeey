@@ -5,6 +5,7 @@ import { Container, Title, TodaysRiddle } from './styles';
 interface RiddleProps {
   riddle: string;
 }
+
 function Riddle({ riddle }: RiddleProps) {
   return (
     <Container>

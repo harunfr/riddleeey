@@ -148,6 +148,7 @@ export const DecorativeContainer = styled(Row)`
   & > * {
     animation: ${fadeOutIn} 1.5s linear infinite forwards;
     background-color: green;
+    color: #fff;
   }
   & > :nth-child(1) {
     animation-delay: 0.3s;
