@@ -69,18 +69,30 @@ function HowToModal({ handleShowHowToClick }: HowToModalProps) {
               <li>
                 The letter
                 {' '}
-                <BoldText>O</BoldText>
+                <BoldText>I</BoldText>
                 {' '}
-                is in the word and in the
+                is in the word and not in the
                 correct spot.
               </li>
               <li>
                 The letter
                 {' '}
-                <BoldText>R</BoldText>
+                <BoldText>N</BoldText>
                 {' '}
                 is not in the word in any
                 spot.
+              </li>
+              <li>
+                The letter
+                {' '}
+                <BoldText>G</BoldText>
+                {' '}
+                &
+                {' '}
+                <BoldText>S</BoldText>
+                {' '}
+                is
+                redundant.
               </li>
             </ListWrapper>
           </LessonWrapper>
@@ -105,7 +117,7 @@ function HowToModal({ handleShowHowToClick }: HowToModalProps) {
               <DummyCell status="absent">Y</DummyCell>
             </DummyCells>
 
-            <p>After first guess, length of answer can be seen.</p>
+            <p>After first guess, length of the answer can be seen.</p>
           </LessonWrapper>
         </ExamplesWrapper>
         <Strong>

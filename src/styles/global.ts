@@ -26,9 +26,11 @@ export const lightTheme = {
   color: '#333',
   background: '#FFF',
   howToColor: '#333',
+  cellColor: 'gray',
 };
 export const darkTheme = {
   color: '#5773ff',
   background: '#101c29',
   howToColor: '#ddd',
+  cellColor: '#101c29',
 };

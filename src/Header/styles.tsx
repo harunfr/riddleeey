@@ -41,7 +41,7 @@ export const HowTo = styled(GrCircleQuestion)`
 `;
 
 export const Logo = styled.div`
-  font-family: "hogBoldHMK";
+  font-family: 'hogBoldHMK';
   font-size: 2rem;
   font-weight: 600;
   & > * {
@@ -73,5 +73,5 @@ export const Settings = styled(FcSettings)`
 
 export const Colorful = styled.span`
   /* color:red; */
-  font-family: "hogBoldHMK";
+  font-family: 'hogBoldHMK';
 `;

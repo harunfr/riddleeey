@@ -48,7 +48,7 @@ export const HowTo = styled(FaRegQuestionCircle)`
 `;
 
 export const Logo = styled.div`
-  font-family: "hogBoldHMK";
+  font-family: 'hogBoldHMK';
   font-size: 2rem;
   font-weight: 600;
   & > * {
@@ -88,5 +88,5 @@ export const ButtonToLight = styled(FiSun)`
 `;
 
 export const Colorful = styled.span`
-  font-family: "hogBoldHMK";
+  font-family: 'hogBoldHMK';
 `;

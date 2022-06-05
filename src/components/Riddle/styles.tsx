@@ -18,5 +18,5 @@ export const Title = styled.h2`
 
 export const TodaysRiddle = styled.div`
   font-size: 1.6rem;
-  font-family: "Times New Roman", Times, serif;
+  font-family: 'Times New Roman', Times, serif;
 `;

@@ -13,7 +13,7 @@ import {
   unfoldMixin,
   foldReverseMixin,
   unfoldReverseMixin,
-} from './animations.styled';
+} from './animations';
 
 export const Container = styled.div<{
   turn: number;
@@ -87,7 +87,6 @@ export const Row = styled.div<{ turn?: number }>`
 `;
 
 export const Cell = styled.div<{ turn?: number; status?: string }>`
-  border: ${(props) => (!props.status ? '2px solid #d3d6da' : 'none')};
   width: 62px;
   height: 62px;
   display: flex;
@@ -95,7 +94,8 @@ export const Cell = styled.div<{ turn?: number; status?: string }>`
   justify-content: center;
   font-size: 2rem;
   font-weight: bold;
-  color: ${(props) => props.theme.color};
+  border: ${(props) => (!props.status ? '2px solid #d3d6da' : 'none')};
+  color: ${(props) => (props.status ? '#eee' : '#5773ff')};
   background-color: ${(props) =>
     props.status === 'correct'
       ? '#6AAA64'

@@ -4,7 +4,11 @@ import { ThemeProvider } from 'styled-components';
 
 import Game from './Game/Game';
 import GlobalFonts from './fonts/fonts';
-import GlobalStyle, { MainWrapper, lightTheme, darkTheme } from './styles/global';
+import GlobalStyle, {
+  MainWrapper,
+  lightTheme,
+  darkTheme,
+} from './styles/global';
 
 import Header from './components/Header';
 import InputArea from './components/InputArea';
