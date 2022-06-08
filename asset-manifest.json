@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.js": "/riddleeey/static/js/main.800ea33d.js",
+    "main.js": "/riddleeey/static/js/main.ff5d13f1.js",
     "static/media/Sibyl_Alternates.woff": "/riddleeey/static/media/Sibyl_Alternates.c8d0965a58563773888b.woff",
     "static/media/Sibyl_Alternates.woff2": "/riddleeey/static/media/Sibyl_Alternates.3132057cc8b29093c3cb.woff2",
     "static/media/Hog_Bold_HMK.woff": "/riddleeey/static/media/Hog_Bold_HMK.40e0967483bbbc9f05b7.woff",
     "static/media/Hog_Bold_HMK.woff2": "/riddleeey/static/media/Hog_Bold_HMK.7d6102dbdbc7e02773c9.woff2",
     "index.html": "/riddleeey/index.html",
-    "main.800ea33d.js.map": "/riddleeey/static/js/main.800ea33d.js.map"
+    "main.ff5d13f1.js.map": "/riddleeey/static/js/main.ff5d13f1.js.map"
   },
   "entrypoints": [
-    "static/js/main.800ea33d.js"
+    "static/js/main.ff5d13f1.js"
   ]
 }
