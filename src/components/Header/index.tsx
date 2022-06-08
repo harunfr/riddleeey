@@ -5,8 +5,8 @@ import {
   Wrapper,
   HowTo,
   Logo,
-  ButtonToDark,
   Colorful,
+  ButtonToDark,
   ButtonToLight,
 } from './styles';
 
