@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Container, Title, TodaysRiddle } from './styles';
+import Spinner from './Spinner';
 
 interface RiddleProps {
   riddle: string;
@@ -13,7 +14,15 @@ function Riddle({ riddle, isRiddleFetched }: RiddleProps) {
   return (
     <Container>
       <Title>
-        {isRiddleFetched ? fetchedRiddleMessage : waitingFetchMessage}
+        {isRiddleFetched ? (
+          fetchedRiddleMessage
+        ) : (
+          <p>
+            <Spinner />
+            {' '}
+            {waitingFetchMessage}
+          </p>
+        )}
       </Title>
       <TodaysRiddle>
         &quot;

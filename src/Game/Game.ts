@@ -148,17 +148,14 @@ export default class Game {
     if (this.isGuessed) {
       this.result = 'success';
     }
-    // mark keyboard keys
-    // this.cellsStack[this.guessCount].forEach(() => {
 
-    // })
-
-    // mark cells correct, present or absent.
+    // mark cells & keyboard keys correct, present or absent.
     this.cellsStack[this.guessCount].forEach((cell, position) => {
       // for first turn
       if (!cell.letter) {
         return;
       }
+
       if (cell.letter && this.answer.includes(cell.letter)) {
         if (cell.letter === this.answer[position]) {
           cell.status = 'correct';
@@ -175,14 +172,18 @@ export default class Game {
         this.letters[cell.letter] = 'absent';
       }
     });
+
     this.guessCount += 1;
+
     // handle last chance.
     if (this.guessCount === 6) {
       this.result = 'failure';
     }
+
     if (this.isGuessed) {
       this.result = 'success';
     }
+
     this.guesses.push(this.guess);
     this.addingOrder = 0;
   }

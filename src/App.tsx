@@ -45,7 +45,6 @@ function App() {
     turn: gameClone.guessCount,
     addingOrder: gameClone.addingOrder,
   });
-
   const [showGuesses, setShowGuesses] = useState(false);
   const [isRiddleFetched, setIsRiddleFetched] = useState(false);
   const [riddle, setRiddle] = useState('');
@@ -75,7 +74,6 @@ function App() {
       turn: gameClone.guessCount,
       addingOrder: gameClone.addingOrder,
     });
-
     setShowGuesses(false);
     setIsRiddleFetched(false);
     setShouldFetchNewRiddle(!shouldFetchNewRiddle);
@@ -146,6 +144,7 @@ function App() {
     fetchRiddle();
   }, [shouldFetchNewRiddle]);
 
+  // keydown handler attached to windows object
   useEffect(() => {
     const keyDownHandler = (event: { key: string }) => {
       const hasRoomForLetter = gameState.addingOrder < 12;
