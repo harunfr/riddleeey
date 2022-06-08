@@ -2,7 +2,7 @@
 
 [Live Demo](https://harunfr.github.io/riddleeey/) :point_left:
 
-This is a riddle app, gets riddles from a [rest api](https://github.com/harunfr/riddleeey8000) and serves it using Wordle's interface which is quite popular game at the moment.
+This is a riddle app, gets riddles from a [rest api](https://github.com/harunfr/riddleeey8000/) and serves it using Wordle's interface which is quite popular game at the moment.
 
 ![Snapshot of Game](./riddleeey.gif)
 
@@ -43,5 +43,5 @@ Made it using test driven development, which made refactors and adding new featu
 ---
 #### Clone, Browse, Build, Run.
 ```markdown
-		git clone git@github.com:harunfr/battleship.git && cd battleship/ && code . && npm i && npm start
+		git clone git@github.com:harunfr/riddleeey.git && cd riddleeey/ && code . && npm i && npm start
 ```
