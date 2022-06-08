@@ -90,7 +90,7 @@ function App() {
 
   // to handle keyboard key click events on bottom
   const handleKeyClick = (children: string) => {
-    const hasRoomForLetter = gameState.addingOrder < 12;
+    const hasRoomForLetter = gameState.addingOrder < 15;
 
     if (
       !isRiddleFetched ||
@@ -147,7 +147,7 @@ function App() {
   // keydown handler attached to windows object
   useEffect(() => {
     const keyDownHandler = (event: { key: string }) => {
-      const hasRoomForLetter = gameState.addingOrder < 12;
+      const hasRoomForLetter = gameState.addingOrder < 15;
 
       if (
         !isRiddleFetched ||
