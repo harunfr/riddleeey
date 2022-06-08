@@ -4,7 +4,7 @@ const rotate = keyframes`
   100% {
     transform: rotate(360deg);
   }
-`
+`;
 
 const dash = keyframes`
       0% {
@@ -19,7 +19,7 @@ const dash = keyframes`
       stroke-dasharray: 90, 150;
       stroke-dashoffset: -124;
     }
-`
+`;
 
 export const Container = styled.div`
   justify-self: center;
