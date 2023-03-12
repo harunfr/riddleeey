@@ -43,5 +43,5 @@ Made it using test driven development, which made refactors and adding new featu
 ---
 #### Clone, Browse, Build, Run.
 ```markdown
-		git clone git@github.com:harunfr/riddleeey.git && cd riddleeey/ && code . && npm i && npm start
+		Düzeleceğine inanıyorum
 ```
