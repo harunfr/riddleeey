@@ -51,9 +51,7 @@ function App() {
   const [answer, setAnswer] = useState('');
   const [shouldFetchNewRiddle, setShouldFetchNewRiddle] = useState(false);
 
-  const {
-    cellsStack, gameStatus, turn, addingOrder,
-  } = gameState;
+  const { cellsStack, gameStatus, turn, addingOrder } = gameState;
 
   // input validator
   const isValidInput = (input: string) => {
@@ -129,18 +127,19 @@ function App() {
 
   // fetch riddle and answer
   useEffect(() => {
-    const riddlesSourceURL =
-      'https://riddleeey-8000.herokuapp.com/api/v1/riddles/random';
+    const riddlesSourceURL = 'https://riddleservernode.fly.dev/riddle';
 
     const fetchRiddle = async () => {
-      setRiddle('Heroku dyno is waking up, please wait...');
+      setRiddle('Fly io server is waking up, please wait...');
       const response = await fetch(riddlesSourceURL);
+
       const fetchedRiddle = await response.json();
-      const riddleObject = fetchedRiddle[0];
-      setRiddle(riddleObject.body);
-      setAnswer(riddleObject.answer);
+
+      setRiddle(fetchedRiddle.body);
+      setAnswer(fetchedRiddle.answer);
       setIsRiddleFetched(true);
     };
+
     fetchRiddle();
   }, [shouldFetchNewRiddle]);
 

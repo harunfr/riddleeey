@@ -10,7 +10,7 @@ interface RiddleProps {
 
 function Riddle({ riddle, isRiddleFetched }: RiddleProps) {
   const fetchedRiddleMessage = 'Today’s riddle';
-  const waitingFetchMessage = 'Fetching riddle from database.';
+  const waitingFetchMessage = 'Preparing riddle...';
   return (
     <Container>
       <Title>
@@ -18,9 +18,7 @@ function Riddle({ riddle, isRiddleFetched }: RiddleProps) {
           fetchedRiddleMessage
         ) : (
           <p>
-            <Spinner />
-            {' '}
-            {waitingFetchMessage}
+            <Spinner /> {waitingFetchMessage}
           </p>
         )}
       </Title>
